@@ -31,6 +31,8 @@ public final class UserData {
     userMap.remove(user);
   }
 
+  public static UserDTO getUserDetails(String user) { return userMap.get(user); }
+
   public static Map<String,UserDTO> getAllUsers() {
     return userMap;
   }

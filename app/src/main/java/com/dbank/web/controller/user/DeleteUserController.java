@@ -2,7 +2,8 @@ package com.dbank.web.controller.user;
 
 import org.springframework.web.bind.annotation.RestController;
 import com.dbank.service.user.interfaces.DeleteUser;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 public class DeleteUserController {
@@ -12,8 +13,8 @@ public class DeleteUserController {
     this.deleteUser = deleteUser;
   }
 
-  @PostMapping("api/v1/delete/{user}")
-  public void delete() {
-
+  @GetMapping("api/v1/delete/{user}")
+  public void delete(@PathVariable("user") String user) {
+    deleteUser.delete(user);
   }
 }

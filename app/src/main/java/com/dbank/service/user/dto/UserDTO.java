@@ -12,13 +12,13 @@ public class UserDTO {
   private final String lastName;
 
   @JsonProperty("balance")
-  private final long balance;
+  private AmountDTO balance;
 
   @JsonCreator
   public UserDTO(
     @JsonProperty("firstname") String firstName,
     @JsonProperty("lastname") String lastName,
-    @JsonProperty("balance") long balance ) {
+    @JsonProperty("balance") AmountDTO balance ) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.balance = balance;
@@ -28,6 +28,10 @@ public class UserDTO {
 
   public String getLastName() {return lastName;}
 
-  public Long getBalance() {return balance;}
+  public AmountDTO getBalance() {return balance;}
+
+  public void setBalance(AmountDTO newBalanceAmount) {
+    this.balance = newBalanceAmount;
+  }
 
 }
