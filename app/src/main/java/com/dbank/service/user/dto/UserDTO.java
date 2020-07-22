@@ -1,7 +1,7 @@
 package com.dbank.service.user.dto;
 
+import com.dbank.service.pay.dto.AmountDTO;
 import com.fasterxml.jackson.annotation.JsonCreator;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserDTO {

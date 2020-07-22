@@ -2,7 +2,7 @@ package com.dbank.web.controller.pay;
 
 import org.springframework.web.bind.annotation.RestController;
 import com.dbank.service.pay.interfaces.DebitMoney;
-import com.dbank.service.user.dto.AmountDTO;
+import com.dbank.service.pay.dto.AmountDTO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

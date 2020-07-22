@@ -1,4 +1,4 @@
-package com.dbank.service.user.dto;
+package com.dbank.service.pay.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
