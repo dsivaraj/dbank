@@ -1,11 +1,30 @@
-FROM openjdk:8-jdk-alpine as app
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
-ARG DEPENDENCY=build
-COPY ${DEPENDENCY}/libs /app/libs
+FROM debian:stretch as app
+RUN apt-get update && \
+    apt-get install -y openjdk-8-jdk && \
+    apt-get -y install \
+    vim \
+    curl \
+    jq
+## Add user and group for global pay
+#RUN groupadd -g 1000 spring && \
+ #   useradd -m -g spring -u 1000 spring
+#RUN addgroup -S spring && adduser spring -G spring
+#USER spring:spring
+ENV SRC_HOME /dbank
+WORKDIR $SRC_HOME
+RUN mkdir -p app gradle
+#RUN mkdir -p gradle
+COPY  app/ app/
+COPY  gradle/ gradle/
+#COPY  --chown=spring:spring gradle/ app/gradle/
+COPY ["gradlew", "build.gradle", "gradlew.bat","settings.gradle","/dbank/"]
+RUN ./gradlew clean build
+#ARG DEPENDENCY=build
+#COPY ${DEPENDENCY}/libs /app/libs
 EXPOSE 8080
-CMD java -jar /app/libs/dbank-1.0-SNAPSHOT.jar
-#ENTRYPOINT ["java","-cp","app:app/libs/*","com.dbank.MainApp"]
+#RUN java -jar ./build/libs/dbank-1.0-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","./build/libs/dbank-1.0-SNAPSHOT.jar"]
+
 
 ##The stages are built "from top to bottom"
 #######################################################
