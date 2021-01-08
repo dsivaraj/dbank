@@ -11,7 +11,7 @@ public class MainApp {
 
   @RequestMapping("/")
   public String home() {
-    return "Happy Banking";
+    return "Welcome to DBank";
   }
 
   public static void main(String[] args) {
