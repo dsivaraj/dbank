@@ -1,10 +1,17 @@
 FROM openjdk:8-jdk-alpine as app
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
-ARG DEPENDENCY=build
-COPY ${DEPENDENCY}/libs /app/libs
+#RUN addgroup -S spring && adduser -S spring -G spring
+#USER spring:spring
+#RUN mkdir -p app/gradle/
+COPY ["gradlew", "build.gradle","settings.gradle", "/"]
+COPY ["gradle/wrapper","/gradle/wrapper"]
+COPY ["app/src", "/app/src"]
+#ARG DEPENDENCY=build
+#COPY ${DEPENDENCY}/libs /app/libs
+RUN ./gradlew --version
+RUN ./gradlew clean build
+#CMD ./gradlew clean build
+CMD java -jar /build/libs/dbank-1.0-SNAPSHOT.jar
 EXPOSE 8080
-CMD java -jar /app/libs/dbank-1.0-SNAPSHOT.jar
 #ENTRYPOINT ["java","-cp","app:app/libs/*","com.dbank.MainApp"]
 
 ##The stages are built "from top to bottom"
